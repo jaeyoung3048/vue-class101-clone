@@ -12,6 +12,7 @@
             type="search"
             placeholder="찾으시는 취미가 있으신가요?"
             maxlength="100"
+            v-on:click="isShowCategory = true"
           />
           <button class="SearchInput__SearchButton">
             <img src="../assets/search_icon.svg" alt="/" />
@@ -24,33 +25,19 @@
         </div>
       </div>
     </div>
-    <div class="MainSearchContainer__Wrapper">
+    <div class="MainSearchContainer__Wrapper" v-show="isShowCategory">
       <div class="MainSearchContainer">
         <div class="SearchHistory__Container">
           <div class="SearchHistory__Header">
             <h3 class="SearchHistory__Text">추천 검색어</h3>
           </div>
           <div class="RecommendSearchKeywordList__Container">
-            <button class="CandidateItem__Button">
-              <div class="CandidateText">오늘만 특가</div>
-            </button>
-            <button class="CandidateItem__Button">
-              <div class="CandidateText">아이패드0원</div>
-            </button>
-            <button class="CandidateItem__Button">
-              <div class="CandidateText">TOP20</div>
-            </button>
-            <button class="CandidateItem__Button">
-              <div class="CandidateText">1+1클래스</div>
-            </button>
-            <button class="CandidateItem__Button">
-              <div class="CandidateText">여름 취미 추천</div>
-            </button>
-            <button class="CandidateItem__Button">
-              <div class="CandidateText">감사제 특가</div>
-            </button>
-            <button class="CandidateItem__Button">
-              <div class="CandidateText">10만원할인</div>
+            <button
+              class="CandidateItem__Button"
+              v-for="recommended in DummyData.recommended"
+              :key="recommended"
+            >
+              <div class="CandidateText">{{ recommended }}</div>
             </button>
           </div>
           <div class="Divider__Container">
@@ -67,47 +54,27 @@
           </div>
           <div class="PopularSearchKeywordList__Row">
             <div class="PopularSearchKeywordList__Column">
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">1</span>
-                <span class="CandidateItem__Text">아이패드</span>
-              </div>
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">2</span>
-                <span class="CandidateItem__Text">일러스트</span>
-              </div>
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">3</span>
-                <span class="CandidateItem__Text">이모티콘</span>
-              </div>
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">4</span>
-                <span class="CandidateItem__Text">드로잉</span>
-              </div>
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">5</span>
-                <span class="CandidateItem__Text">포토샵</span>
+              <div
+                class="CandidateItem__Container"
+                v-for="(Item, index) in DummyData.popular"
+                :key="DummyData.popular[index]"
+              >
+                <span class="CadidateItem__Number" v-if="index < 5">{{
+                  index + 1
+                }}</span>
+                <span class="CandidateItem__Text" v-if="index < 5">{{
+                  Item
+                }}</span>
               </div>
             </div>
             <div class="PopularSearchKeywordList__Column">
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">6</span>
-                <span class="CandidateItem__Text">뜨개질</span>
-              </div>
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">7</span>
-                <span class="CandidateItem__Text">레진</span>
-              </div>
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">8</span>
-                <span class="CandidateItem__Text">주식</span>
-              </div>
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">9</span>
-                <span class="CandidateItem__Text">포토크리에이트</span>
-              </div>
-              <div class="CandidateItem__Container">
-                <span class="CadidateItem__Number">10</span>
-                <span class="CandidateItem__Text">가전주부 PICK</span>
+              <div
+                class="CandidateItem__Container"
+                v-for="(Item, index) in DummyData.popular.slice(5)"
+                :key="DummyData.popular[index]"
+              >
+                <span class="CadidateItem__Number">{{ index + 6 }}</span>
+                <span class="CandidateItem__Text">{{ Item }}</span>
               </div>
             </div>
           </div>
@@ -118,22 +85,37 @@
 </template>
 
 <script>
-// import DummyData from '../../data.json'
-
 export default {
   name: 'Header',
-  data() {
+  data: () => {
     return {
       isShowCategory: false,
+      DummyData: {
+        recommended: [
+          '오늘의 특가',
+          '아이패드0원',
+          'TOP20',
+          '1+1클래스',
+          '여름 취미 추천',
+          '감사제 특가',
+          '10만원할인',
+        ],
+        popular: [
+          '아이패드',
+          '일러스트',
+          '이모티콘',
+          '드로잉',
+          '포토샵',
+          '뜨개질',
+          '레진',
+          '주식',
+          '포토크리에이트',
+          '가전주부 PICK',
+        ],
+      },
     }
   },
-  methods: {
-    isShowCategoryController: () => {
-      this.isShowCategory
-        ? this.isShowCategory == false
-        : this.isShowCategory == true
-    },
-  },
+  props: ['isShowCategoryProps'],
 }
 </script>
 
