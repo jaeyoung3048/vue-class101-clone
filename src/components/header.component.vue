@@ -6,13 +6,16 @@
           <img src="../assets/CLASS101_Logo.svg" alt="/" />
         </a>
       </span>
-      <div class="SearchInput">
-        <form class="SearchContainer">
+      <div class="SearchInput" v-bind:style="SearchInputHandler">
+        <form class="SearchContainer" v-bind:style="SearchContainerHandler">
           <input
             type="search"
             placeholder="찾으시는 취미가 있으신가요?"
             maxlength="100"
-            v-on:click="isShowCategory = true"
+            v-on:click="
+              isShowCategory = true
+              isShowCartText = false
+            "
           />
           <button class="SearchInput__SearchButton">
             <img src="../assets/search_icon.svg" alt="/" />
@@ -21,7 +24,7 @@
       </div>
       <div class="CartContainer">
         <div class="CartLink__Wrapper">
-          <a href="/cart" class="CartLink">장바구니</a>
+          <a href="/cart" class="CartLink" v-if="isShowCartText">장바구니</a>
         </div>
       </div>
     </div>
@@ -90,6 +93,7 @@ export default {
   data: () => {
     return {
       isShowCategory: false,
+      isShowCartText: true,
       DummyData: {
         recommended: [
           '오늘의 특가',
@@ -115,7 +119,33 @@ export default {
       },
     }
   },
-  props: ['isShowCategoryProps'],
+  computed: {
+    SearchInputHandler: function() {
+      if (this.isShowCategory == true){
+        return {
+          width: '676px',
+          margin: 'auto',
+        }
+      } else {
+        return {
+          width: '420px',
+        }
+      }
+    },
+    SearchContainerHandler: function() {
+      if (this.isShowCategory == true){
+        return {
+          display: 'flex',
+          'flex-direction': 'column',
+        }
+      } else {
+        return {
+          position: 'realtive',
+          flex: '1 1 0%',
+        }
+      }
+    },
+  },
 }
 </script>
 
@@ -172,7 +202,7 @@ export default {
           outline: none;
           position: relative;
           top: calc(-50% - 12px);
-          left: 85%;
+          left: calc(100% - 48px);
           padding: 0px;
           width: 20px;
           height: 20px;
