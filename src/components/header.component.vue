@@ -56,6 +56,61 @@
           <div class="Divider__Container">
             <hr color="#f8f8f8" class="Divider__Line" />
           </div>
+          <div class="SearchHistory__HeaderRow">
+            <h3 class="SearchHistory__Text">
+              인기 검색어
+              <div class="SearchHistory__GeneratedAt">
+                <img src="../assets/Time_icon.svg" />
+                <div class="SearchHistory__GeneratedAtText">13:15 기준</div>
+              </div>
+            </h3>
+          </div>
+          <div class="PopularSearchKeywordList__Row">
+            <div class="PopularSearchKeywordList__Column">
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">1</span>
+                <span class="CandidateItem__Text">아이패드</span>
+              </div>
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">2</span>
+                <span class="CandidateItem__Text">일러스트</span>
+              </div>
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">3</span>
+                <span class="CandidateItem__Text">이모티콘</span>
+              </div>
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">4</span>
+                <span class="CandidateItem__Text">드로잉</span>
+              </div>
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">5</span>
+                <span class="CandidateItem__Text">포토샵</span>
+              </div>
+            </div>
+            <div class="PopularSearchKeywordList__Column">
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">6</span>
+                <span class="CandidateItem__Text">뜨개질</span>
+              </div>
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">7</span>
+                <span class="CandidateItem__Text">레진</span>
+              </div>
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">8</span>
+                <span class="CandidateItem__Text">주식</span>
+              </div>
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">9</span>
+                <span class="CandidateItem__Text">포토크리에이트</span>
+              </div>
+              <div class="CandidateItem__Container">
+                <span class="CadidateItem__Number">10</span>
+                <span class="CandidateItem__Text">가전주부 PICK</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -237,6 +292,29 @@ export default {
                 letter-spacing: normal;
                 margin: 0px 0px 0px 4px;
                 color: rgb(202, 202, 202);
+              }
+            }
+          }
+        }
+        .PopularSearchKeywordList__Row {
+          display: flex;
+          .PopularSearchKeywordList__Column {
+            max-width: 50%;
+            flex: 1 0 50%;
+            .CandidateItem__Container {
+              padding: 8px 0px;
+              font-size: 14px;
+              line-height: 20px;
+              .CadidateItem__Number {
+                width: 18px;
+                margin-right: 8px;
+                font-weight: bold;
+                letter-spacing: -1px;
+                color: rgb(255, 86, 0);
+              }
+              .CadidateItem__Text {
+                margin-bottom: 0px;
+                color: rgb(26, 26, 26);
               }
             }
           }
