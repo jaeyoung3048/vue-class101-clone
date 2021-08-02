@@ -1,7 +1,7 @@
 <template>
   <div class="HeaderWrapper">
     <div class="HeaderBox">
-      <span class="LogoWrapper">
+      <span class="LogoWrapper" v-bind:class="isShowCategory ? 'Active' : ''">
         <a href="/">
           <img src="../assets/CLASS101_Logo.svg" alt="/" />
         </a>
@@ -17,14 +17,27 @@
               isShowCartText = false
             "
           />
-          <button class="SearchInput__SearchButton">
+          <button
+            class="SearchInput__SearchButton"
+            v-bind:class="isShowCategory ? 'Active' : ''"
+          >
             <img src="../assets/search_icon.svg" alt="/" />
           </button>
         </form>
+        <button
+          class="Search__CancelButton"
+          v-if="isShowCategory"
+          v-on:click="
+            isShowCategory = false
+            isShowCartText = true
+          "
+        >
+          취소
+        </button>
       </div>
-      <div class="CartContainer">
+      <div class="CartContainer" v-if="isShowCartText">
         <div class="CartLink__Wrapper">
-          <a href="/cart" class="CartLink" v-if="isShowCartText">장바구니</a>
+          <a href="/cart" class="CartLink">장바구니</a>
         </div>
       </div>
     </div>
@@ -59,7 +72,7 @@
             <div class="PopularSearchKeywordList__Column">
               <div
                 class="CandidateItem__Container"
-                v-for="(Item, index) in DummyData.popular"
+                v-for="(Item, index) in DummyData.popular.slice(-5)"
                 :key="DummyData.popular[index]"
               >
                 <span class="CadidateItem__Number" v-if="index < 5">{{
@@ -121,10 +134,11 @@ export default {
   },
   computed: {
     SearchInputHandler: function() {
-      if (this.isShowCategory == true){
+      if (this.isShowCategory == true) {
         return {
           width: '676px',
           margin: 'auto',
+          'align-items': 'center',
         }
       } else {
         return {
@@ -133,10 +147,10 @@ export default {
       }
     },
     SearchContainerHandler: function() {
-      if (this.isShowCategory == true){
+      if (this.isShowCategory == true) {
         return {
           display: 'flex',
-          'flex-direction': 'column',
+          'flex-direction': 'row',
         }
       } else {
         return {
@@ -162,6 +176,12 @@ export default {
     width: 100%;
     margin: 0px 372px;
     max-width: 1176px;
+    position: relative;
+    .LogoWrapper.Active {
+      position: absolute;
+      left: 0%;
+      height: 50%;
+    }
     .LogoWrapper {
       display: flex;
       margin-right: 28px;
@@ -177,8 +197,8 @@ export default {
       display: flex;
       width: 420px;
       form {
-        position: realtive;
         flex: 1 1 0%;
+        align-items: center;
         input {
           display: flex;
           font-size: 14px;
@@ -197,6 +217,10 @@ export default {
         input:focus {
           outline: none;
         }
+        .SearchInput__SearchButton.Active {
+          top: -3px;
+          left: -8%;
+        }
         .SearchInput__SearchButton {
           cursor: pointer;
           outline: none;
@@ -209,12 +233,30 @@ export default {
           background-color: rgb(248, 248, 249);
           border-color: rgb(248, 248, 249);
           border: none;
+          margin: 0px;
           color: #ffffff;
           a {
             width: 20px;
             height: 20px;
           }
         }
+      }
+      .Search__CancelButton {
+        display: inline;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.15px;
+        margin: 0px 0px 0px 16px;
+        border: none;
+        outline: none;
+        padding: 0px;
+        height: fit-content;
+        background-color: transparent;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: 500;
+        color: rgb(162, 162, 162);
+        white-space: nowrap;
       }
     }
     .CartContainer {
