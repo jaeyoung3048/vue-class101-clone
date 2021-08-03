@@ -148,6 +148,7 @@ export default {
     },
     SearchContainerHandler: function() {
       if (this.isShowCategory == true) {
+        document.body.style.cssText = `overflow: hidden;`
         return {
           display: 'flex',
           'flex-direction': 'row',
