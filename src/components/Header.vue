@@ -1,36 +1,27 @@
 <template>
   <div class="header-wrapper">
     <div class="header-box">
-      <span class="logo-wrapper" v-bind:class="isShowCategory ? 'active' : ''">
+      <span class="logo-wrapper" :class="{ active: isShowCategory }">
         <a href="/">
           <img src="../assets/CLASS101_Logo.svg" alt="/" />
         </a>
       </span>
-      <div class="search-input" v-bind:style="SearchInputHandler">
-        <form class="search-container" v-bind:style="SearchContainerHandler">
+      <div class="search-input" :style="searchInputStyleHandler">
+        <form class="search-container" :style="searchContainerStyleHandler">
           <input
             type="search"
             placeholder="찾으시는 취미가 있으신가요?"
             maxlength="100"
-            v-on:click="
-              isShowCategory = true
-              isShowCartText = false
-            "
+            @click="isShowController()"
           />
-          <button
-            class="search-button"
-            v-bind:class="isShowCategory ? 'Active' : ''"
-          >
+          <button class="search-button" :class="{ active: isShowCategory }">
             <img src="../assets/search_icon.svg" alt="/" />
           </button>
         </form>
         <button
           class="search-cancel-button"
           v-if="isShowCategory"
-          v-on:click="
-            isShowCategory = false
-            isShowCartText = true
-          "
+          @click="isShowController(true)"
         >
           취소
         </button>
@@ -41,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="search-container-wrapper" v-show="isShowCategory">
+    <div v-show="isShowCategory" class="search-container-wrapper">
       <div class="search-container">
         <div class="search-history-container">
           <div class="search-history-header">
@@ -50,7 +41,7 @@
           <div class="recommend-search-keyword-list">
             <button
               class="candidate-item-button"
-              v-for="recommended in DummyData.recommended"
+              v-for="recommended in dummyData.recommended"
               :key="recommended"
             >
               <div class="candidate-text">{{ recommended }}</div>
@@ -72,8 +63,8 @@
             <div class="popular-search-keyword-list-column">
               <div
                 class="candidate-item-container"
-                v-for="(Item, index) in DummyData.popular.slice(-5)"
-                :key="DummyData.popular[index]"
+                v-for="(Item, index) in dummyData.popular.slice(-5)"
+                :key="dummyData.popular[index]"
               >
                 <span class="cadidate-item-number" v-if="index < 5">{{
                   index + 1
@@ -86,8 +77,8 @@
             <div class="popular-search-keyword-list-column">
               <div
                 class="candidate-item-container"
-                v-for="(Item, index) in DummyData.popular.slice(5)"
-                :key="DummyData.popular[index]"
+                v-for="(Item, index) in dummyData.popular.slice(5)"
+                :key="dummyData.popular[index]"
               >
                 <span class="cadidate-item-number">{{ index + 6 }}</span>
                 <span class="candidate-item-text">{{ Item }}</span>
@@ -103,11 +94,11 @@
 <script>
 export default {
   name: 'Header',
-  data: () => {
+  data() {
     return {
       isShowCategory: false,
       isShowCartText: true,
-      DummyData: {
+      dummyData: {
         recommended: [
           '오늘의 특가',
           '아이패드0원',
@@ -133,8 +124,8 @@ export default {
     }
   },
   computed: {
-    SearchInputHandler: function() {
-      if (this.isShowCategory == true) {
+    searchInputStyleHandler() {
+      if (this.isShowCategory) {
         return {
           width: '676px',
           margin: 'auto',
@@ -146,8 +137,8 @@ export default {
         }
       }
     },
-    SearchContainerHandler: function() {
-      if (this.isShowCategory == true) {
+    searchContainerStyleHandler() {
+      if (this.isShowCategory) {
         document.body.style.cssText = `overflow: hidden;`
         return {
           display: 'flex',
@@ -158,6 +149,17 @@ export default {
           position: 'realtive',
           flex: '1 1 0%',
         }
+      }
+    },
+  },
+  methods: {
+    isShowController(cancel) {
+      if (cancel) {
+        this.isShowCategory = false
+        this.isShowCartText = true
+      } else {
+        this.isShowCategory = true
+        this.isShowCartText = false
       }
     },
   },
@@ -181,16 +183,16 @@ input::-webkit-search-results-decoration {
 
 .header-wrapper {
   width: 100%;
-  height: 5.375rem;
+  height: 86px;
 
   .header-box {
     display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 48px;
     padding: 20px 0px;
     font-size: 0px;
-    justify-content: center;
-    height: 48px;
-    width: 100%;
-    margin: 0px 372px;
+    margin: 0px auto;
     max-width: 1176px;
     position: relative;
 
@@ -202,17 +204,17 @@ input::-webkit-search-results-decoration {
 
     .logo-wrapper {
       display: flex;
+      align-items: center;
       margin-right: 28px;
       height: 100%;
-      align-items: center;
 
       img {
         display: flex;
         width: auto;
         height: 24px;
       }
-
     }
+
     .search-input {
       display: flex;
       width: 420px;
@@ -241,11 +243,11 @@ input::-webkit-search-results-decoration {
           outline: none;
         }
 
-        .search-button.Active {
+        .search-button.active {
           top: -3px;
           left: -8%;
         }
-        
+
         .search-button {
           cursor: pointer;
           outline: none;
