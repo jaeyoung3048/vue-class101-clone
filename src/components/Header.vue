@@ -1,13 +1,13 @@
 <template>
-  <div class="HeaderWrapper">
-    <div class="HeaderBox">
-      <span class="LogoWrapper" v-bind:class="isShowCategory ? 'Active' : ''">
+  <div class="header-wrapper">
+    <div class="header-box">
+      <span class="logo-wrapper" v-bind:class="isShowCategory ? 'active' : ''">
         <a href="/">
           <img src="../assets/CLASS101_Logo.svg" alt="/" />
         </a>
       </span>
-      <div class="SearchInput" v-bind:style="SearchInputHandler">
-        <form class="SearchContainer" v-bind:style="SearchContainerHandler">
+      <div class="search-input" v-bind:style="SearchInputHandler">
+        <form class="search-container" v-bind:style="SearchContainerHandler">
           <input
             type="search"
             placeholder="찾으시는 취미가 있으신가요?"
@@ -18,14 +18,14 @@
             "
           />
           <button
-            class="SearchInput__SearchButton"
+            class="search-button"
             v-bind:class="isShowCategory ? 'Active' : ''"
           >
             <img src="../assets/search_icon.svg" alt="/" />
           </button>
         </form>
         <button
-          class="Search__CancelButton"
+          class="search-cancel-button"
           v-if="isShowCategory"
           v-on:click="
             isShowCategory = false
@@ -35,62 +35,62 @@
           취소
         </button>
       </div>
-      <div class="CartContainer" v-if="isShowCartText">
-        <div class="CartLink__Wrapper">
-          <a href="/cart" class="CartLink">장바구니</a>
+      <div class="cart-container" v-if="isShowCartText">
+        <div class="cart-text-wrapper">
+          <a href="/cart" class="cart-text">장바구니</a>
         </div>
       </div>
     </div>
-    <div class="MainSearchContainer__Wrapper" v-show="isShowCategory">
-      <div class="MainSearchContainer">
-        <div class="SearchHistory__Container">
-          <div class="SearchHistory__Header">
-            <h3 class="SearchHistory__Text">추천 검색어</h3>
+    <div class="search-container-wrapper" v-show="isShowCategory">
+      <div class="search-container">
+        <div class="search-history-container">
+          <div class="search-history-header">
+            <h3 class="search-history-text">추천 검색어</h3>
           </div>
-          <div class="RecommendSearchKeywordList__Container">
+          <div class="recommend-search-keyword-list">
             <button
-              class="CandidateItem__Button"
+              class="candidate-item-button"
               v-for="recommended in DummyData.recommended"
               :key="recommended"
             >
-              <div class="CandidateText">{{ recommended }}</div>
+              <div class="candidate-text">{{ recommended }}</div>
             </button>
           </div>
-          <div class="Divider__Container">
-            <hr color="#f8f8f8" class="Divider__Line" />
+          <div class="divider-container">
+            <hr color="#f8f8f8" class="divider-line" />
           </div>
-          <div class="SearchHistory__HeaderRow">
-            <h3 class="SearchHistory__Text">
+          <div class="search-history-header-row">
+            <h3 class="search-history-text">
               인기 검색어
-              <div class="SearchHistory__GeneratedAt">
+              <div class="search-history-generated-at-container">
                 <img src="../assets/Time_icon.svg" />
-                <div class="SearchHistory__GeneratedAtText">13:15 기준</div>
+                <div class="search-history-generated-at-text">13:15 기준</div>
               </div>
             </h3>
           </div>
-          <div class="PopularSearchKeywordList__Row">
-            <div class="PopularSearchKeywordList__Column">
+          <div class="popular-search-keyword-list-row">
+            <div class="popular-search-keyword-list-column">
               <div
-                class="CandidateItem__Container"
+                class="candidate-item-container"
                 v-for="(Item, index) in DummyData.popular.slice(-5)"
                 :key="DummyData.popular[index]"
               >
-                <span class="CadidateItem__Number" v-if="index < 5">{{
+                <span class="cadidate-item-number" v-if="index < 5">{{
                   index + 1
                 }}</span>
-                <span class="CandidateItem__Text" v-if="index < 5">{{
+                <span class="candidate-item-text" v-if="index < 5">{{
                   Item
                 }}</span>
               </div>
             </div>
-            <div class="PopularSearchKeywordList__Column">
+            <div class="popular-search-keyword-list-column">
               <div
-                class="CandidateItem__Container"
+                class="candidate-item-container"
                 v-for="(Item, index) in DummyData.popular.slice(5)"
                 :key="DummyData.popular[index]"
               >
-                <span class="CadidateItem__Number">{{ index + 6 }}</span>
-                <span class="CandidateItem__Text">{{ Item }}</span>
+                <span class="cadidate-item-number">{{ index + 6 }}</span>
+                <span class="candidate-item-text">{{ Item }}</span>
               </div>
             </div>
           </div>
@@ -179,10 +179,11 @@ input::-webkit-search-results-decoration {
   display: none;
 }
 
-.HeaderWrapper {
+.header-wrapper {
   width: 100%;
   height: 5.375rem;
-  .HeaderBox {
+
+  .header-box {
     display: flex;
     padding: 20px 0px;
     font-size: 0px;
@@ -192,28 +193,34 @@ input::-webkit-search-results-decoration {
     margin: 0px 372px;
     max-width: 1176px;
     position: relative;
-    .LogoWrapper.Active {
+
+    .logo-wrapper.active {
       position: absolute;
       left: 0%;
       height: 50%;
     }
-    .LogoWrapper {
+
+    .logo-wrapper {
       display: flex;
       margin-right: 28px;
       height: 100%;
       align-items: center;
+
       img {
         display: flex;
         width: auto;
         height: 24px;
       }
+
     }
-    .SearchInput {
+    .search-input {
       display: flex;
       width: 420px;
-      form {
+
+      .search-container {
         flex: 1 1 0%;
         align-items: center;
+
         input {
           display: flex;
           font-size: 14px;
@@ -229,14 +236,17 @@ input::-webkit-search-results-decoration {
           text-align: left;
           color: rgb(26, 26, 26);
         }
+
         input:focus {
           outline: none;
         }
-        .SearchInput__SearchButton.Active {
+
+        .search-button.Active {
           top: -3px;
           left: -8%;
         }
-        .SearchInput__SearchButton {
+        
+        .search-button {
           cursor: pointer;
           outline: none;
           position: relative;
@@ -256,7 +266,7 @@ input::-webkit-search-results-decoration {
           }
         }
       }
-      .Search__CancelButton {
+      .search-cancel-button {
         display: inline;
         font-size: 14px;
         line-height: 20px;
@@ -274,16 +284,16 @@ input::-webkit-search-results-decoration {
         white-space: nowrap;
       }
     }
-    .CartContainer {
+    .cart-container {
       display: flex;
       align-items: center;
       margin-left: auto;
       position: relative;
-      .CartLink__Wrapper {
+      .cart-text-wrapper {
         display: flex;
         justify-content: flex-end;
         flex-grow: 1;
-        .CartLink {
+        .cart-text {
           position: relative;
           white-space: nowrap;
           color: inherit;
@@ -293,21 +303,21 @@ input::-webkit-search-results-decoration {
       }
     }
   }
-  .MainSearchContainer__Wrapper {
+  .search-container-wrapper {
     background-color: rgb(255, 255, 255);
-    .MainSearchContainer {
+    .search-container {
       max-width: 676px;
       margin: auto;
       padding-bottom: 20px;
-      .SearchHistory__Container {
+      .search-history-container {
         padding: 24px 0px 28px;
         width: 100%;
         border-radius: 0px 0px 3px 3px;
-        .SearchHistory__Header {
+        .search-history-header {
           display: flex;
           align-items: center;
           margin-bottom: 12px;
-          .SearchHistory__Text {
+          .search-history-text {
             display: flex;
             font-size: 14px;
             line-height: 20px;
@@ -315,11 +325,11 @@ input::-webkit-search-results-decoration {
             margin: 0px;
           }
         }
-        .RecommendSearchKeywordList__Container {
+        .recommend-search-keyword-list {
           display: flex;
           flex-wrap: wrap;
           padding-bottom: 8px;
-          .CandidateItem__Button {
+          .candidate-item-button {
             background-color: rgb(248, 248, 248);
             border: 0px;
             margin: 8px 4px 0px 0px;
@@ -328,25 +338,25 @@ input::-webkit-search-results-decoration {
             border-radius: 30px;
           }
         }
-        .Divider__Container {
+        .divider-container {
           margin: 16px 0px 24px;
-          .Divider__Line {
+          .divider-line {
             border: none;
             height: 1px;
             margin: 0px !important;
           }
         }
-        .SearchHistory__HeaderRow {
+        .search-history-header-row {
           display: flex;
           align-items: center;
           margin-bottom: 12px;
-          .SearchHistory__Text {
+          .search-history-text {
             display: flex;
             font-size: 14px;
             line-height: 20px;
             flex: 1 1 0%;
             margin: 0px;
-            .SearchHistory__GeneratedAt {
+            .search-history-generated-at-container {
               display: flex;
               align-items: center;
               margin-left: 6px;
@@ -354,7 +364,7 @@ input::-webkit-search-results-decoration {
                 width: 14px;
                 height: 14px;
               }
-              .SearchHistory__GeneratedAtText {
+              .search-history-generated-at-text {
                 font-size: 11px;
                 font-weight: normal;
                 line-height: 16px;
@@ -365,23 +375,23 @@ input::-webkit-search-results-decoration {
             }
           }
         }
-        .PopularSearchKeywordList__Row {
+        .popular-search-keyword-list-row {
           display: flex;
-          .PopularSearchKeywordList__Column {
+          .popular-search-keyword-list-column {
             max-width: 50%;
             flex: 1 0 50%;
-            .CandidateItem__Container {
+            .candidate-item-container {
               padding: 8px 0px;
               font-size: 14px;
               line-height: 20px;
-              .CadidateItem__Number {
+              .cadidate-item-number {
                 width: 18px;
                 margin-right: 8px;
                 font-weight: bold;
                 letter-spacing: -1px;
                 color: rgb(255, 86, 0);
               }
-              .CadidateItem__Text {
+              .candidate-item-text {
                 margin-bottom: 0px;
                 color: rgb(26, 26, 26);
               }
