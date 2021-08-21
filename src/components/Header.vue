@@ -40,9 +40,10 @@
           </div>
           <div class="recommend-search-keyword-list">
             <button
-              class="candidate-item-button"
               v-for="recommended in dummyData.recommended"
               :key="recommended"
+              class="candidate-item-button"
+
             >
               <div class="candidate-text">{{ recommended }}</div>
             </button>
@@ -62,9 +63,9 @@
           <div class="popular-search-keyword-list-row">
             <div class="popular-search-keyword-list-column">
               <div
-                class="candidate-item-container"
                 v-for="(Item, index) in dummyData.popular.slice(-5)"
                 :key="dummyData.popular[index]"
+                class="candidate-item-container"
               >
                 <span class="cadidate-item-number" v-if="index < 5">{{
                   index + 1
@@ -76,9 +77,9 @@
             </div>
             <div class="popular-search-keyword-list-column">
               <div
-                class="candidate-item-container"
                 v-for="(Item, index) in dummyData.popular.slice(5)"
                 :key="dummyData.popular[index]"
+                class="candidate-item-container"
               >
                 <span class="cadidate-item-number">{{ index + 6 }}</span>
                 <span class="candidate-item-text">{{ Item }}</span>
