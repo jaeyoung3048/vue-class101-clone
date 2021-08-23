@@ -7,11 +7,24 @@
       </button>
       <button class="category-navigation-tab-button event">7월 가입혜택</button>
       <button
-        v-for="data in navigationData"
+        v-for="data in navigationBoldData"
         :key="data"
         class="category-navigation-tab-button"
       >
         {{ data }}
+      </button>
+      <div class="category-navigation-line" />
+      <div class="category-navigation-divider" />
+      <button
+        class="category-navigation-tab-button normal-font"
+        v-for="data in navigationNormalData"
+        :key="data"
+      >
+        {{ data }}
+      </button>
+      <button class="category-navigation-tab-button normal-font">
+        Created by
+        <div class="category-navigation-new-badge" />
       </button>
     </div>
   </div>
@@ -22,7 +35,8 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      navigationData: ['바로수강', '얼리버드', '오픈 예정', '이벤트'],
+      navigationBoldData: ['바로수강', '얼리버드', '오픈 예정', '이벤트'],
+      navigationNormalData: ['시그니처', '키즈'],
       dummyData: {
         드로잉: ['펜, 연필', '마카', '색연필'],
         공예: ['실 공예', '대바늘뜨개', '실바늘뜨개'],
@@ -38,6 +52,8 @@ export default {
   position: relative;
   width: 100%;
   background-color: rgb(255, 255, 255);
+  z-index: -1;
+
   .category-navigation-navigation-bar {
     position: relative;
     width: 100%;
@@ -48,6 +64,7 @@ export default {
     align-items: center;
     overflow: auto;
     justify-content: flex-start;
+
     .category-navigation-tab-button {
       font-size: 16px;
       line-height: 24px;
@@ -61,9 +78,36 @@ export default {
       color: rgb(26, 26, 26);
       font-weight: bold;
       cursor: pointer;
+
+      .category-navigation-new-badge {
+        margin-left: 6px;
+        width: 4px;
+        height: 4px;
+        border-radius: 2px;
+        background: rgb(243, 33, 59);
+      }
     }
+
+    .normal-font {
+      font-weight: 400;
+    }
+
     .event {
       color: rgb(29, 78, 250);
+    }
+
+    .category-navigation-line {
+      min-height: 30px;
+      width: 1px;
+      background-color: rgb(248, 248, 248);
+      margin-bottom: 12px;
+    }
+
+    .category-navigation-divider {
+      margin-top: 14px;
+      flex: 1 1 0%;
+      max-width: 32px;
+      height: 22px;
     }
   }
 }
