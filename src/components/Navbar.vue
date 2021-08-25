@@ -16,9 +16,9 @@
       <div class="category-navigation-line" />
       <div class="category-navigation-divider" />
       <button
-        class="category-navigation-tab-button normal-font"
         v-for="data in navigationNormalData"
         :key="data"
+        class="category-navigation-tab-button normal-font"
       >
         {{ data }}
       </button>
@@ -49,13 +49,11 @@ export default {
 
 <style lang="scss">
 .category-navigation-container {
-  position: relative;
   width: 100%;
   background-color: rgb(255, 255, 255);
-  z-index: -1;
+  z-index: 0;
 
   .category-navigation-navigation-bar {
-    position: relative;
     width: 100%;
     max-width: 1176px;
     margin: 0px auto;
@@ -71,6 +69,7 @@ export default {
       margin-right: 28px;
       padding: 8px 0px 20px;
       display: flex;
+      position: relative;
       box-sizing: border-box;
       border: none;
       outline: none;
@@ -86,6 +85,25 @@ export default {
         border-radius: 2px;
         background: rgb(243, 33, 59);
       }
+    }
+
+    .category-navigation-tab-button:hover{
+      font-weight: bold;
+    }
+
+    .category-navigation-tab-button.event:hover:after {
+      background-color: rgb(29, 78, 250);
+    }
+
+    .category-navigation-tab-button:hover:after {
+      content: '';
+      background-color: rgb(26, 26, 26);
+      position: absolute;
+      bottom: 10px;
+      left: 0px;
+      width: 100%;
+      height: 2px;
+      z-index: 999;
     }
 
     .normal-font {
