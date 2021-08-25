@@ -27,6 +27,22 @@
         <div class="category-navigation-new-badge" />
       </button>
     </div>
+    <div class="category-navigation-categories-wrapper">
+      <section class="top-categories-group-wrapper">
+        <section class="top-categories-group first-categories-group">
+          <section class="top-categories-group root-category-group">
+            <h2>크리에이티브</h2>
+            <h3
+              v-for="data in Object.keys(dummyData)"
+              :key="data"
+              class="top-categories-group child-category-label"
+            >
+              {{ data }}
+            </h3>
+          </section>
+        </section>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -49,6 +65,7 @@ export default {
 
 <style lang="scss">
 .category-navigation-container {
+  position: relative;
   width: 100%;
   background-color: rgb(255, 255, 255);
   z-index: 0;
@@ -126,6 +143,65 @@ export default {
       flex: 1 1 0%;
       max-width: 32px;
       height: 22px;
+    }
+  }
+
+  .category-navigation-categories-wrapper {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    margin-left: 352px;
+    top: 52px;
+    border-right: 1px solid rgb(239, 239, 239);
+    border-bottom: 1px solid rgb(239, 239, 239);
+    border-left: 1px solid rgb(239, 239, 239);
+    border-image: initial;
+    border-top: none;
+    z-index: 51;
+
+    .top-categories-group-wrapper {
+      display: flex;
+      flex-direction: row;
+      border-radius: 2px;
+
+      .top-categories-group.first-categories-group {
+        width: 220px;
+        overflow: auto;
+        margin-top: 20px;
+        padding: 0px 12px;
+
+        .top-categories-group.root-category-group {
+          margin: 0px;
+          padding-bottom: 20px;
+
+          h2 {
+            padding-left: 20px;
+            font-weight: bold;
+            font-size: 11px;
+            color: rgb(162, 162, 162);
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            margin: 0px 0px 4px;
+            line-height: unset;
+          }
+
+          h3 {
+            padding: 8px 8px 8px 20px;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0px;
+            color: rgb(26, 26, 26);
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            font-weight: normal;
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 }
