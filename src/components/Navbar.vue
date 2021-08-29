@@ -41,6 +41,18 @@
             </h3>
           </section>
         </section>
+        <section class="top-categories-group second-categories-group">
+          <section class="top-categories-group root-category-group">
+            <h2>크리에이티브</h2>
+            <h3
+              v-for="data in dummyData"
+              :key="data"
+              class="top-categories-group child-category-label"
+            >
+              {{ data[0] }}
+            </h3>
+          </section>
+        </section>
       </section>
     </div>
   </div>
@@ -201,6 +213,52 @@ export default {
             cursor: pointer;
           }
         }
+      }
+
+      .top-categories-group.second-categories-group {
+        width: 220px;
+        overflow: auto;
+        margin-top: 20px;
+        padding: 0px 12px;
+
+        .top-categories-group.root-category-group {
+          margin: 0px;
+          padding-bottom: 20px;
+
+          h2 {
+            padding-left: 20px;
+            font-weight: bold;
+            font-size: 11px;
+            color: rgb(162, 162, 162);
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            margin: 0px 0px 4px;
+            line-height: unset;
+          }
+
+          h3 {
+            padding: 8px 8px 8px 20px;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0px;
+            color: rgb(26, 26, 26);
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            font-weight: normal;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .second-categories-group {
+        border-left: 1px solid rgb(239, 239, 239);
+        width: 220px;
+        padding: 0px 12px;
+        margin-top: 20px;
       }
     }
   }
