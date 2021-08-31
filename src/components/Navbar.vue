@@ -1,7 +1,7 @@
 <template>
   <div class="category-navigation-container">
     <div class="category-navigation-navigation-bar">
-      <button class="category-navigation-tab-button all-category">
+      <button class="category-navigation-tab-button all-category" @click="isShowAllCategoryHandler()">
         전체 카테고리
         <img src="../assets/dropdown_icon.svg" />
       </button>
@@ -27,7 +27,10 @@
         <div class="category-navigation-new-badge" />
       </button>
     </div>
-    <div class="category-navigation-categories-wrapper">
+    <div
+      class="category-navigation-categories-wrapper"
+      v-if="isShowAllCategory"
+    >
       <section class="top-categories-group-wrapper">
         <section class="top-categories-group first-categories-group">
           <section class="top-categories-group root-category-group">
@@ -36,20 +39,25 @@
               v-for="data in Object.keys(dummyData)"
               :key="data"
               class="top-categories-group child-category-label"
+              @mouseover="isShowSecondCategoryHandler()"
+              @mouseleave="isShowSecondCategoryHandler()"
             >
               {{ data }}
             </h3>
           </section>
         </section>
-        <section class="top-categories-group second-categories-group">
+        <section
+          class="top-categories-group second-categories-group"
+          v-if="isShowSecondCategory"
+        >
           <section class="top-categories-group root-category-group">
             <h2>크리에이티브</h2>
             <h3
-              v-for="data in dummyData"
-              :key="data"
+              v-for="(data, key, index) in dummyData"
+              :key="index"
               class="top-categories-group child-category-label"
             >
-              {{ data[0] }}
+              {{ key }}
             </h3>
           </section>
         </section>
@@ -70,7 +78,19 @@ export default {
         공예: ['실 공예', '대바늘뜨개', '실바늘뜨개'],
         '요리, 음료': ['아시안', '양식', '중식'],
       },
+      selectedCategory: '',
+      isShowAllCategory: false,
+      isShowSecondCategory: false,
     }
+  },
+  methods: {
+    isShowAllCategoryHandler() {
+      this.isShowAllCategory = !this.isShowAllCategory
+    },
+    secondCategoryHandler() {
+      this.isShowSecondCategory = !this.isShowSecondCategory
+
+    },
   },
 }
 </script>
