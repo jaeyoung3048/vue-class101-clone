@@ -183,8 +183,10 @@ input::-webkit-search-results-decoration {
 }
 
 .header-wrapper {
+  position: relative;
   width: 100%;
   height: 86px;
+  z-index: 2;
 
   .header-box {
     display: flex;
