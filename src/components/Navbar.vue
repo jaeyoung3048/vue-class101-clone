@@ -1,7 +1,10 @@
 <template>
   <div class="category-navigation-container">
     <div class="category-navigation-navigation-bar">
-      <button class="category-navigation-tab-button all-category" @click="isShowAllCategoryHandler()">
+      <button
+        class="category-navigation-tab-button all-category"
+        @click="isShowAllCategoryHandler()"
+      >
         전체 카테고리
         <img src="../assets/dropdown_icon.svg" />
       </button>
@@ -40,7 +43,6 @@
               :key="data"
               class="top-categories-group child-category-label"
               @mouseover="isShowSecondCategoryHandler()"
-              @mouseleave="isShowSecondCategoryHandler()"
             >
               {{ data }}
             </h3>
@@ -100,7 +102,7 @@ export default {
   position: relative;
   width: 100%;
   background-color: rgb(255, 255, 255);
-  z-index: 0;
+  z-index: 1;
 
   .category-navigation-navigation-bar {
     width: 100%;
