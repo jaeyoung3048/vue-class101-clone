@@ -6,13 +6,13 @@
           <img src="../assets/CLASS101_Logo.svg" alt="/" />
         </a>
       </span>
-      <div class="search-input" :style="searchInputStyleHandler">
-        <form class="search-container" :style="searchContainerStyleHandler">
+      <div class="search-input" :class="{ active: isShowCategory }">
+        <form class="search-container" :style="searchContainerStyle">
           <input
             type="search"
             placeholder="찾으시는 취미가 있으신가요?"
             maxlength="100"
-            @click="isShowController()"
+            @click="openSearchWindow()"
           />
           <button class="search-button" :class="{ active: isShowCategory }">
             <img src="../assets/search_icon.svg" alt="/" />
@@ -21,7 +21,7 @@
         <button
           class="search-cancel-button"
           v-if="isShowCategory"
-          @click="isShowController(true)"
+          @click="closeSearchWindow()"
         >
           취소
         </button>
@@ -43,14 +43,11 @@
               v-for="recommended in dummyData.recommended"
               :key="recommended"
               class="candidate-item-button"
-
             >
               <div class="candidate-text">{{ recommended }}</div>
             </button>
           </div>
-          <div class="divider-container">
-            <hr color="#f8f8f8" class="divider-line" />
-          </div>
+          <div class="divider"></div>
           <div class="search-history-header-row">
             <h3 class="search-history-text">
               인기 검색어
@@ -63,26 +60,22 @@
           <div class="popular-search-keyword-list-row">
             <div class="popular-search-keyword-list-column">
               <div
-                v-for="(Item, index) in dummyData.popular.slice(-5)"
-                :key="dummyData.popular[index]"
+                v-for="(item, index) in dummyData.popular.slice(-5)"
+                :key="item"
                 class="candidate-item-container"
               >
-                <span class="cadidate-item-number" v-if="index < 5">{{
-                  index + 1
-                }}</span>
-                <span class="candidate-item-text" v-if="index < 5">{{
-                  Item
-                }}</span>
+                <span class="cadidate-item-number">{{ index + 1 }}</span>
+                <span class="candidate-item-text">{{ item }}</span>
               </div>
             </div>
             <div class="popular-search-keyword-list-column">
               <div
-                v-for="(Item, index) in dummyData.popular.slice(5)"
-                :key="dummyData.popular[index]"
+                v-for="(item, index) in dummyData.popular.slice(5)"
+                :key="item"
                 class="candidate-item-container"
               >
                 <span class="cadidate-item-number">{{ index + 6 }}</span>
-                <span class="candidate-item-text">{{ Item }}</span>
+                <span class="candidate-item-text">{{ item }}</span>
               </div>
             </div>
           </div>
@@ -125,20 +118,7 @@ export default {
     }
   },
   computed: {
-    searchInputStyleHandler() {
-      if (this.isShowCategory) {
-        return {
-          width: '676px',
-          margin: 'auto',
-          'align-items': 'center',
-        }
-      } else {
-        return {
-          width: '420px',
-        }
-      }
-    },
-    searchContainerStyleHandler() {
+    searchContainerStyle() {
       if (this.isShowCategory) {
         document.body.style.cssText = `overflow: hidden;`
         return {
@@ -154,14 +134,13 @@ export default {
     },
   },
   methods: {
-    isShowController(cancel) {
-      if (cancel) {
-        this.isShowCategory = false
-        this.isShowCartText = true
-      } else {
-        this.isShowCategory = true
-        this.isShowCartText = false
-      }
+    closeSearchWindow() {
+      this.isShowCategory = false
+      this.isShowCartText = true
+    },
+    openSearchWindow() {
+      this.isShowCategory = true
+      this.isShowCartText = false
     },
   },
 }
@@ -199,17 +178,17 @@ input::-webkit-search-results-decoration {
     max-width: 1176px;
     position: relative;
 
-    .logo-wrapper.active {
-      position: absolute;
-      left: 0%;
-      height: 50%;
-    }
-
     .logo-wrapper {
       display: flex;
       align-items: center;
       margin-right: 28px;
       height: 100%;
+
+      &.active {
+        position: absolute;
+        left: 0;
+        height: 50%;
+      }
 
       img {
         display: flex;
@@ -221,6 +200,12 @@ input::-webkit-search-results-decoration {
     .search-input {
       display: flex;
       width: 420px;
+
+      &.active {
+        width: 676px;
+        margin: auto;
+        align-items: center;
+      }
 
       .search-container {
         flex: 1 1 0%;
@@ -343,14 +328,14 @@ input::-webkit-search-results-decoration {
             border-radius: 30px;
           }
         }
-        .divider-container {
+
+        .divider {
           margin: 16px 0px 24px;
-          .divider-line {
-            border: none;
-            height: 1px;
-            margin: 0px !important;
-          }
+          height: 1px;
+          width: 100%;
+          background-color: #f8f8f8;
         }
+
         .search-history-header-row {
           display: flex;
           align-items: center;
